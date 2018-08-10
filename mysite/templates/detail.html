@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="ui grid">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            <div class="ui normal breadcrumb">
+                <!--<a href="{% url 'mysite:posts' %}" class="section">全部文章</a>-->
+                <i class="right angle icon divider"></i>
+                <a href="{% url 'mysite:category' post.category_id  %}" class="section">{{ post.category }}</a>
+                <i class="right angle icon divider"></i>
+                <div class="active section">{{ post.title }}</div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui vertical container">
+                {{ post.body | safe }}
+            </div>
+            <div class="ui divider"></div>
+        </div>
+        {% include 'comments.html' %}
+    </div>
+    <!--右侧栏-->
+    {% include 'right_column.html' %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="ui grid">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            <a class="ui red ribbon label" href="#">最新文章</a>
+            <div class="ui animated list">
+                {% for post in post_list %}
+                <div class="item">
+                    <div class="right floated content">
+                        <div class="ui date">{{ post.created_time | date:'Y-m-d' }}</div>
+                        <p></p>
+                        <div class="ui date"><i class="ui grey eye icon"></i>{{ post.views }}</div>
+                        <p></p>
+                        <div class="ui date"></div>
+                    </div>
+                    <a href="{% url 'mysite:detail' post.id %}">{{ post.title }}</a>
+                    <p></p>
+                    <p id="excerpt">{{ post.excerpt }}</p>
+                    <div class="ui divider"></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ui segment">
+            <a class="ui yellow ribbon label" href="#">新鲜事</a>
+            <div class="ui animated list">
+                <div class="item">
+                    <div class="right floated content">
+                        <div class="ui date">{{ top_news.date | date:'m-d' }}</div>
+                    </div>
+                    <a href="#">{{ top_news.title }}</a>
+                    <div class="ui divider"></div>
+                </div>
+                <div class="item">
+                    <div class="right floated content">
+                        <div class="ui date">{{ d2_top_news.date | date:'m-d' }}</div>
+                    </div>
+                    <a href="#">{{ d2_top_news.title }}</a>
+                    <div class="ui divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--右侧栏-->
+    {% include 'right_column.html' %}
+</div>
+{% endblock %}

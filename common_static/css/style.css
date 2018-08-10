@@ -1,0 +1,82 @@
+canvas {
+    display: block;
+    vertical-align: bottom;
+}
+
+#particles-js {
+    background-color: #e6e6e6;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    opacity: 0.8;
+    width: 100%;
+}
+
+#excerpt {
+    font-size:10px;
+    color:#808080;
+}
+
+#hot_news {
+    color: red;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+
+/* .ui.vertical.segment.masthead {
+	height: 300px;
+	background-image: url("{% static 'images/star_banner.jpg' %}");
+	background-size: cover;
+	background-position: 100% 80%;
+} */
+
+.ui.container.segment {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 1000px;
+}
+
+.ui.center.aligned.header.blogslogon {
+    margin-top: 40px;
+}
+
+.ui.center.aligned.header.blogslogon p {
+    margin-top: 10px;
+    color: white;
+    font-size: 10px;
+}
+
+.ui.container.nav {
+    width: 500px;
+}
+
+.ui.basic.center.aligned.segment {
+    font-weight: lighter;
+    font-size: 10px;
+}
+
+.ui.image {
+    /* width: 500px; */
+    z-index:1
+}
+
+.ui.card {
+    width: 100%;
+}
+
+.ui.animated.list{
+    font-size:14px;
+}
+
+.ui.comments .comment .avatar img  {
+    height:auto;
+}

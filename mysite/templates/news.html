@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="ui grid">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            <a class="ui red ribbon label">DOTA2</a>
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <div class="ui animated list">
+                        {% for news in d2_news_list %}
+                        <div class="item">
+                            <div class="right floated content">
+                                <div class="ui date">{{ news.date | date:'m-d' }}</div>
+                            </div>
+                            <a href="{{ news.newsurl }}">{{ news.title }}</a>
+                            <div class="ui divider"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <a href="{{ d2_top_news.newsurl }}" class="ui image">
+                        <img src="{{ d2_top_news.imgs }}">
+                    </a>
+                    <div class="ui red center aligned header">
+                        <a href="{{ d2_top_news.newsurl }}" id="hot_news">{{ d2_top_news.title }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui segment">
+            <a class="ui blue ribbon label">Steam</a>
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <div class="ui animated list">
+                        {% for news in news_list %}
+                        <div class="item">
+                            <div class="right floated content">
+                                <div class="ui date">{{ news.date | date:'m-d' }}</div>
+                            </div>
+                            <a href="{{ news.newsurl }}">{{ news.title }}</a>
+                            <div class="ui divider"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <a href="{{ top_news.newsurl }}" class="ui image">
+                        <img src="{{ top_news.imgs }}">
+                    </a>
+                    <div class="ui red center aligned header">
+                        <a href="{{ top_news.newsurl }}" id="hot_news">{{ top_news.title }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--右侧栏-->
+    {% include 'right_column.html' %}
+</div>
+
+{% endblock %}

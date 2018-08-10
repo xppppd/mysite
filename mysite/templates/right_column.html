@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% load mysite_tags %}
+<div class="four wide column">
+    <!-- 名片 -->
+    <div class="ui big card">
+        <div class="image">
+            <img src="{% static '/images/matthew.png' %}">
+        </div>
+        <div class="content">
+            <a class="header">Kristy</a>
+            <div class="meta">
+                <span class="date">Joined in 2013</span>
+            </div>
+            <div class="description">
+                Kristy is an art director living in New York.
+            </div>
+        </div>
+        <div class="extra content">
+            <a>
+                <i class="user icon"></i>
+                22 Friends
+            </a>
+        </div>
+    </div>
+    <!-- 常用链接 -->
+    <div class="ui segment">
+        <div class="ui header">
+            <h3>常用链接</h3>
+        </div>
+        <div class="ui list">
+            <div class="item">
+                <a>我的云盘</a>
+            </div>
+            <div class="item">
+                <a>FTP</a>
+            </div>
+            <div class="item">
+                <a>腾讯云</a>
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        <div class="ui header">
+            <h3>文章分类</h3>
+        </div>
+        {% get_categories as category_list %}
+        {% for category in category_list %}
+        <div class="ui list">
+            <div class="item">
+                <a href="{% url 'mysite:category' category.pk %}">{{ category.name }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="ui segment">
+        <div class="ui header">
+            <h3>文章归档</h3>
+        </div>
+        {% archives as date_list %}
+        {% for date in date_list %}
+        <div class="ui list">
+            <div class="item">
+                <a href="{% url 'mysite:archives' date.year date.month %}">{{ date | date:'Y年m月文章归档' }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
