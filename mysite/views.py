@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView,CreateView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import *
 from .forms import *
 import logging
@@ -27,10 +27,12 @@ class IndexView(ListView):
     model = Post
     template_name = 'index.html'
     context_object_name = 'post_list'
-    paginate_by = 5
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        context['news_list'] = NewsInfo.objects.all()[:4]
+        context['d2_news_list'] = D2NewsInfo.objects.all()[:4]
         context['top_news'] = NewsInfo.objects.filter(top=1)[0]
         context['d2_top_news'] = D2NewsInfo.objects.filter(top=1)[0]
         return context
@@ -178,17 +180,16 @@ class PostDetailView(DetailView):
 
 class AddPostView(CreateView):
     model = Post
-    fields = ['title','body','excerpt','category','tags','author']
+    fields = ['title', 'body', 'excerpt', 'category', 'tags', 'author']
     template_name = 'add.html'
-
 
 
 def news(request):
     try:
-        news_list = NewsInfo.objects.all()[:5]
-        d2_news_list = D2NewsInfo.objects.all()[:5]
-        top_news = NewsInfo.objects.filter(top=1)[0]
-        d2_top_news = D2NewsInfo.objects.filter(top=1)[0]
+        news_list = NewsInfo.objects.all()[:18]
+        d2_news_list = D2NewsInfo.objects.all()[5:22]
+        top_news_list = NewsInfo.objects.filter(top=1)[0:4]
+        d2_top_news_list = D2NewsInfo.objects.all()[:4]
     except Exception as e:
         logger.error(e)
     return render(request, 'news.html', locals())

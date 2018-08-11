@@ -1,63 +1,88 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<div class="ui grid">
-    <div class="twelve wide column">
-        <div class="ui segment">
-            <a class="ui red ribbon label">DOTA2</a>
-            <div class="ui grid">
-                <div class="ten wide column">
-                    <div class="ui animated list">
-                        {% for news in d2_news_list %}
-                        <div class="item">
-                            <div class="right floated content">
-                                <div class="ui date">{{ news.date | date:'m-d' }}</div>
-                            </div>
-                            <a href="{{ news.newsurl }}">{{ news.title }}</a>
-                            <div class="ui divider"></div>
+<div class="ui segment">
+    <div class="ui pointing secondary demo menu">
+        <a class="active red item" data-tab="first">Dota2</a>
+        <a class="blue item" data-tab="second">Steam</a>
+    </div>
+    <div class="ui active tab segment" data-tab="first">
+        <div class="ui grid">
+            <div class="ten wide column">
+                <div class="ui animated list">
+                    {% for news in d2_news_list %}
+                    <div class="item">
+                        <div class="right floated content">
+                            <div class="ui date">{{ news.date | date:'m-d' }}</div>
                         </div>
-                        {% endfor %}
+                        <a href="{{ news.newsurl }}">{{ news.title }}</a>
+                        <div class="ui divider"></div>
                     </div>
-                </div>
-                <div class="six wide column">
-                    <a href="{{ d2_top_news.newsurl }}" class="ui image">
-                        <img src="{{ d2_top_news.imgs }}">
-                    </a>
-                    <div class="ui red center aligned header">
-                        <a href="{{ d2_top_news.newsurl }}" id="hot_news">{{ d2_top_news.title }}</a>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-        <div class="ui segment">
-            <a class="ui blue ribbon label">Steam</a>
-            <div class="ui grid">
-                <div class="ten wide column">
-                    <div class="ui animated list">
-                        {% for news in news_list %}
-                        <div class="item">
-                            <div class="right floated content">
-                                <div class="ui date">{{ news.date | date:'m-d' }}</div>
-                            </div>
-                            <a href="{{ news.newsurl }}">{{ news.title }}</a>
-                            <div class="ui divider"></div>
-                        </div>
-                        {% endfor %}
-                    </div>
+            <div class="six wide column">
+                {% for d2_top_news in d2_top_news_list %}
+                <a href="{{ d2_top_news.newsurl }}" class="ui image">
+                    <img src="{{ d2_top_news.imgs }}">
+                </a>
+                <div class="ui red center aligned header">
+                    <a href="{{ d2_top_news.newsurl }}" id="hot_news">{{ d2_top_news.title }}</a>
                 </div>
-                <div class="six wide column">
-                    <a href="{{ top_news.newsurl }}" class="ui image">
-                        <img src="{{ top_news.imgs }}">
-                    </a>
-                    <div class="ui red center aligned header">
-                        <a href="{{ top_news.newsurl }}" id="hot_news">{{ top_news.title }}</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-    <!--右侧栏-->
-    {% include 'right_column.html' %}
+    <div class="ui tab segment" data-tab="second">
+        <div class="ui grid">
+            <div class="ten wide column">
+                <div class="ui animated list">
+                    {% for news in news_list %}
+                    <div class="item">
+                        <div class="right floated content">
+                            <div class="ui date">{{ news.date | date:'m-d' }}</div>
+                        </div>
+                        <a href="{{ news.newsurl }}">{{ news.title }}</a>
+                        <div class="ui divider"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="six wide column">
+                {% for top_news in top_news_list %}
+                <a href="{{ top_news.newsurl }}" class="ui image">
+                    <img src="{{ top_news.imgs }}">
+                </a>
+                <div class="ui red center aligned header">
+                    <a href="{{ top_news.newsurl }}" id="hot_news">{{ top_news.title }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script src="/Users/xiongpan/Desktop/practice/mysite_project/common_static/js/jquery-2.2.3.js"></script>
+<script src="{% static 'js/jquery-2.2.3.js' %}"></script>
+<script src="{% static 'js/semantic.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+    $('.demo.menu .item').tab({history:false});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
 
 {% endblock %}
