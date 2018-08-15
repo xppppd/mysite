@@ -23,6 +23,10 @@ canvas {
     font-size: 14px;
 }
 
+span.highlighted{
+color:red;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
 }
@@ -45,19 +49,10 @@ p {
     width: 1000px;
 }
 
-.ui.center.aligned.header.blogslogon {
-    margin-top: 40px;
+.ui.form {
+    margin-right:50px;
 }
 
-.ui.center.aligned.header.blogslogon p {
-    margin-top: 10px;
-    color: white;
-    font-size: 10px;
-}
-
-.ui.container.nav {
-    width: 500px;
-}
 
 .ui.basic.center.aligned.segment {
     font-weight: lighter;

@@ -1,34 +1,26 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load highlight %}
+
 {% block content %}
 <div class="ui grid">
     <div class="twelve wide column">
         <div class="ui segment">
-            <div class="ui normal breadcrumb">
-                <!--<a href="{% url 'mysite:posts' %}" class="section">全部文章</a>-->
-                {% if cate %}
-                <i class="right chevron icon divider"></i>
-                <div class="active section">{{ cate.name }}</div>
-                {% endif %}
-                {% if year %}
-                <i class="right chevron icon divider"></i>
-                <div class="active section">{{ year }}年{{ month }}月文章</div>
-                {% endif %}
-            </div>
+            {% if query %}
             <div class="ui list">
-                {% for post in post_list %}
+                {% for result in page.object_list %}
                 <div class="item">
                     <div class="right floated content">
-                        <div class="ui date">{{ post.created_time | date:'Y-m-d' }}</div>
+                        <div class="ui date">{{ result.object.created_time | date:'Y-m-d' }}</div>
                         <p></p>
-                        <div class="ui date"><i class="ui grey eye icon"></i>{{ post.views }}</div>
+                        <div class="ui date"><i class="ui grey eye icon"></i>{{ result.object.views }}</div>
                         <p></p>
                         <div class="ui date"></div>
                     </div>
-                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                    <a class="ui mini label">{{ post.category.name }}</a>
+                    <a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query %}</a>
+                    <a class="ui mini label">{{ result.object.category.name }}</a>
                     <p></p>
-                    <p id="excerpt">{{ post.excerpt }}</p>
+                    <p id="excerpt">{% highlight result.object.body with query %}</p>
                     <p><a href="{{ post.get_absolute_url }}">Readmore>></a></p>
                     <div class="ui divider"></div>
                 </div>
@@ -43,6 +35,9 @@
                 </div>
                 {% endfor %}
             </div>
+            {% else %}
+            请输入搜索关键词，例如 django
+            {% endif %}
 
             {% if is_paginated %}
             <div class="pagination">

@@ -60,6 +60,7 @@ def get_ids(cur,table_name):
 
 
 def save_to_db(data_list):
+    print(data_list[0])
     db = pymysql.connect(*db_info)
     cursor = db.cursor()
     id_list = get_ids(cursor,'news_info')
@@ -67,7 +68,7 @@ def save_to_db(data_list):
         try:
             id = data['newsid']
         except:
-            print(data)
+            # print(data)
             continue
         if int(id) not in id_list:
             click = data['click']
@@ -116,6 +117,7 @@ def save_d2_to_db(data_list):
                   '("{}","{}","{}","{}","{}","{}","{}","{}","{}")'.format(id, click, date, imgs, newsUrl, tag, title,
                                                                           str(matchList), topic_type)
             # 存入数据库
+            print(sql)
             try:
                 # 执行sql语句
                 cursor.execute(sql)
